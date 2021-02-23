@@ -1,10 +1,11 @@
 import subprocess
 import os
+import os.path
 import sys
 
 def main():
 	while True: 
-		command = input("$ ") #we use input here in the main() for simple commands
+		command = input(ehtjash_pwd() + ": $ ") #we use input here in the main() for simple commands
 		if command == "exit":
 			break
 		elif command == "help":
@@ -12,7 +13,7 @@ def main():
 		elif command[:3] == "cd":
 			ehtjash_cd(command[3:])
 		elif command[:3] == "pwd":
-			ehtjash_pwd()
+			print(ehtjash_pwd())
 		else:
 			command_center(command) #we use sys.argv here for subprocess commands
 
@@ -20,14 +21,15 @@ def main():
 def command_center(command):
 	pass
 
-def ehtjash_cd(location): # doesn't work
+def ehtjash_cd(location): # doesn't work yet (Path object?)
+	
 	try:
-		os.chdir(os.path.abspath(location))
-	except Exception:
+		os.chdir("/home/henry/Documents")
+	except NotADirecoryError:
 		print("ehthash cd: no file or directory found")
 
 def ehtjash_pwd():
-	print(os.getcwd())
+	return str(os.getcwd())
 
 def prnt_help():
 	pass
