@@ -4,7 +4,11 @@ import os.path
 import sys
 
 def main():
-	while True: 
+
+	password = 12345
+	key = input("Enter the key: ")
+	
+	while key == password: 
 		command = input(ehtjash_pwd() + ": $ ") #we use input here in the main() for simple commands
 		if command == "exit":
 			break
@@ -16,6 +20,8 @@ def main():
 			print(ehtjash_pwd())
 		else:
 			command_center(command) #we use sys.argv here for subprocess commands
+
+
 
 
 def command_center(command):
