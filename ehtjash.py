@@ -2,6 +2,7 @@ import subprocess
 import os
 import os.path
 import sys
+import argparse
 
 def main():
 
@@ -20,15 +21,22 @@ def main():
 			prnt_help()
 		elif command[:2] == "cd":
 			ehtjash_cd(command[3:])
-		elif command[:3] == "pwd" || command[:3] == "cwd":
+		elif command[:3] == "pwd" or command[:3] == "cwd":
 			print(ehtjash_pwd())
-		elif command[:2] == "ls"
+			'''
+		elif command[:2] == "ls":
 			ehtjash_ls
+			'''
 		else:
 			command_center(command) #we use sys.argv here for subprocess commands
 
 def command_center(command):
-	pass
+	parser = argparse.ArgumentParser()
+	parser.add_argument("--help", dest = "help", type =str, action = "print_help")
+
+	args = parser.parse_args()
+	if (args == "--help"):
+		print(prnt_help())
 
 def ehtjash_cd(location): # doesn't work yet (Path object?)
 	
@@ -43,12 +51,13 @@ def ehtjash_cd(location): # doesn't work yet (Path object?)
 def ehtjash_ls():
 	#Use sys.argv
 
+
 def ehtjash_pwd():
 	return str(os.getcwd())
 
 #Put commands + descriptions 
 def prnt_help():
-	pass
+	print("help segment")
 
 if __name__ == "__main__":
 	main()
