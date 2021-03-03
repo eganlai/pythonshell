@@ -23,11 +23,13 @@ def command_center(command):
 	command_list = command.split(" ")
 
 	if command_list[0] == "pwd" or command_list[0] == "cwd":
-		print(ehtjash_pwd())
-	if command_list[0] == "ls":
-		subprocess.Popen(["/usr/bin/ls"] + command_list[1:])
+		ehtjash_pwd()
 	elif command_list[0] == "cd":
 		ehtjash_cd(command_list[1])
+	elif command_list[0] == "henrydumbfunction":
+		print("haha egan")
+	else:
+		subprocess.Popen(command_list)
 
 '''
 	parser = argparse.ArgumentParser()
