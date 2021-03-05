@@ -12,24 +12,43 @@ def main():
 			break
 		elif command == "--help":
 			prnt_help()
-		command_center(command) 
+		else:
+			command_list = command.split("|")
+		command_center(command_list)
 
-def command_center(command):
-	
+def command_center(command_list, stin):
 
-	if command[:3] == "pwd" or command[:3] == "cwd":
-		print(ehtjash_pwd())
+	command_list
 
-	command_list = command.split(" ")
+	if command_list.length() > 1:
 
-	if command_list[0] == "pwd" or command_list[0] == "cwd":
-		ehtjash_pwd()
-	elif command_list[0] == "cd":
-		ehtjash_cd(command_list[1])
-	elif command_list[0] == "henrydumbfunction":
-		print("haha egan")
+
+		if command_list[i][0] == "pwd" or command_list[0] == "cwd":
+			ehtjash_pwd()
+		elif command_list[i][0] == "cd":
+			ehtjash_cd(command_list[i][1])
+		else:
+			subprocess.Popen(command_list)
 	else:
-		subprocess.Popen(command_list)
+		# no stin 
+
+
+
+	for i in command_list:
+		i.split(" ")
+
+	for i in command_list:
+
+		if command_list[i][0] == "pwd" or command_list[0] == "cwd":
+			ehtjash_pwd()
+		elif command_list[i][0] == "cd":
+			ehtjash_cd(command_list[i][1])
+		elif pipeTest
+
+
+		else:
+			subprocess.Popen(command_list)
+		#command[1:]
 
 '''
 	parser = argparse.ArgumentParser()
