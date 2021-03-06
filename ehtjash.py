@@ -1,54 +1,34 @@
 import subprocess
 import os
-import os.path
-import sys
-import argparse
+from colorama import init, Fore, Back
+#import sys
+#import argparse
 
 def main():
 
 	while True: 
-		command = input(ehtjash_pwd() + ": $ ") #we use input here in the main() for simple commands
+		command = input(ehtjash_pwd() + ": " + Fore.GREEN + "$ " + Fore.WHITE)
 		if command == "exit":
 			break
 		elif command == "--help":
 			prnt_help()
 		else:
 			command_list = command.split("|")
-		command_center(command_list)
+		command_center(command_list, None)
 
-def command_center(command_list, stin):
+def command_center(command_list, stIn):
 
-	command_list
+	command = command_list[0].split(" ")
+	for i in range(len(command) - 1): #take out any empty strings
+		if command[i] == "":
+			del command[i]
 
-	if command_list.length() > 1:
-
-
-		if command_list[i][0] == "pwd" or command_list[0] == "cwd":
-			ehtjash_pwd()
-		elif command_list[i][0] == "cd":
-			ehtjash_cd(command_list[i][1])
-		else:
-			subprocess.Popen(command_list)
-	else:
-		# no stin 
-
-
-
-	for i in command_list:
-		i.split(" ")
-
-	for i in command_list:
-
-		if command_list[i][0] == "pwd" or command_list[0] == "cwd":
-			ehtjash_pwd()
-		elif command_list[i][0] == "cd":
-			ehtjash_cd(command_list[i][1])
-		elif pipeTest
-
-
-		else:
-			subprocess.Popen(command_list)
-		#command[1:]
+	if stIn is not None:
+		command.append(stIn)
+	
+	if len(command_list) > 1:
+		command_center(command_list[1:], commands(command))
+	commands(command)
 
 '''
 	parser = argparse.ArgumentParser()
@@ -60,6 +40,16 @@ def command_center(command_list, stin):
 '''
 	
 	
+def commands(command_list):
+	if command_list[0] == "pwd" or command_list[0] == "cwd":
+		return ehtjash_pwd()
+	elif command_list[0] == "cd":
+		ehtjash_cd(command_list[1])
+	else:
+		try:
+			return subprocess.Popen(command_list)
+		except FileNotFoundError:
+			print("Command Not Found (。_。)")
 
 def ehtjash_cd(location): # doesn't work yet (Path object?)
 	
@@ -70,11 +60,6 @@ def ehtjash_cd(location): # doesn't work yet (Path object?)
 			os.chdir(location)
 	except:
 		print("ehthash cd: no file or directory found")
-
-def ehtjash_ls():
-	#Use sys.argv
-	print("not yet")
-
 
 def ehtjash_pwd():
 	return str(os.getcwd())
