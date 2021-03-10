@@ -1,7 +1,6 @@
 import subprocess
 import os
 from colorama import init, Fore, Back
-#import sys
 #import argparse
 
 def main():
@@ -12,23 +11,35 @@ def main():
 			break
 		elif command == "--help":
 			prnt_help()
-		else:
+		elif "|" in command:
 			command_list = command.split("|")
-		command_center(command_list, None)
+			output = command_center(command_list, None)
+			if output is not None:
+				print(output)
+		else:
+			command_list = command.split(" ")
+			output = single_commands(command_list)
+			if output is not None:
+				print(output)
+
 
 def command_center(command_list, stIn):
-
 	command = command_list[0].split(" ")
-	for i in range(len(command) - 1): #take out any empty strings
-		if command[i] == "":
-			del command[i]
-
-	if stIn is not None:
-		command.append(stIn)
-	
+	while "" in command:
+		command.remove("")
 	if len(command_list) > 1:
-		command_center(command_list[1:], commands(command))
-	commands(command)
+		try:
+			p = subprocess.Popen(command, stdout=subprocess.PIPE, stdin=stIn)
+			return command_center(command_list[1:], p.stdout)
+		except FileNotFoundError:
+			print("Command Not Found (。_。)")
+	else:
+		try:
+			p = subprocess.Popen(command, stdout=subprocess.PIPE, 
+				stdin=stIn)
+			return getPopenOutput(p)
+		except FileNotFoundError:
+			print("Command Not Found (。_。)")
 
 '''
 	parser = argparse.ArgumentParser()
@@ -38,20 +49,23 @@ def command_center(command_list, stIn):
 	if (args == "--help"):
 		print(prnt_help())
 '''
+def getPopenOutput(process):
+	output = str(process.communicate()[0])
+	return output[2:len(output)-1].replace("\\n", "\n")
 	
-	
-def commands(command_list):
+def single_commands(command_list):
 	if command_list[0] == "pwd" or command_list[0] == "cwd":
 		return ehtjash_pwd()
 	elif command_list[0] == "cd":
 		ehtjash_cd(command_list[1])
 	else:
 		try:
-			return subprocess.Popen(command_list)
+			p = subprocess.Popen(command_list, stdout=subprocess.PIPE)
+			return getPopenOutput(p)
 		except FileNotFoundError:
 			print("Command Not Found (。_。)")
 
-def ehtjash_cd(location): # doesn't work yet (Path object?)
+def ehtjash_cd(location):
 	
 	try:
 		if location == "":
