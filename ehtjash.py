@@ -1,9 +1,7 @@
-import subprocess
-import os
+import subprocess, os, glob
 #import argparse
 
 def main():
-
 	while True: 
 		command = input(ehtjash_pwd() + ":\033[1;32m $ \033[1;37m")
 		if command == "exit":
@@ -12,7 +10,7 @@ def main():
 			prnt_help()
 		elif "|" in command:
 			command_list = command.split("|")
-			output = command_center(command_list, None)
+			output = pipe_center(command_list, None)
 			if output is not None:
 				print(output)
 		else:
@@ -22,14 +20,14 @@ def main():
 				print(output)
 
 
-def command_center(command_list, stIn):
+def pipe_center(command_list, stIn):
 	command = command_list[0].split(" ")
 	while "" in command:
 		command.remove("")
 	if len(command_list) > 1:
 		try:
 			p = subprocess.Popen(command, stdout=subprocess.PIPE, stdin=stIn)
-			return command_center(command_list[1:], p.stdout)
+			return pipe_center(command_list[1:], p.stdout)
 		except FileNotFoundError:
 			print("Command Not Found (。_。)")
 	else:
