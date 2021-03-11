@@ -1,12 +1,11 @@
 import subprocess
 import os
-from colorama import init, Fore, Back
 #import argparse
 
 def main():
 
 	while True: 
-		command = input(ehtjash_pwd() + ": " + Fore.GREEN + "$ " + Fore.WHITE)
+		command = input(ehtjash_pwd() + ":\033[1;32m $ \033[1;37m")
 		if command == "exit":
 			break
 		elif command == "--help":
