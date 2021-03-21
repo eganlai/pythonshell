@@ -3,8 +3,7 @@ import subprocess
 import glob
 
 '''
-SEAshell
-Author: Andromeda Kepecs
+Egan, Henry, Teeron, Jonah, Andromeda Shell
 '''
 
 # Colored text
@@ -227,9 +226,9 @@ def prompt():
 
 # Main
 def main():
-	print(Color.BOLD + "Welcome to the Swaggy Expiramental Andromeda shell")
+	print(Color.BOLD + "Welcome to ehtjash, a shell written in Python")
 	while True:
-		commands = input(Color.PROMPT + "SEAshell:" + str(os.path.basename(os.getcwd())) + " " + os.getlogin() + prompt() + Color.IN)
+		commands = input(Color.PROMPT + "ehtjash:" + str(os.path.basename(os.getcwd())) + " " + os.getlogin() + prompt() + Color.IN)
 		if commands == "exit":
 			print(Color.OUT + "Terminated")
 			break
