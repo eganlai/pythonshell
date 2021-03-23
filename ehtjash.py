@@ -156,6 +156,7 @@ def parse(tokens):
 			proc_list.append(arg_list)
 			operate(element, proc_list[prev_proc], proc_list[current_proc])
 
+'''
 	if not has_operators:	# Shortcut
 		try:
 			subprocess.run(arg_list)
@@ -163,7 +164,7 @@ def parse(tokens):
 			print(Color.BAD + "Error")
 
 
-'''
+
 			op_count += 1
 			job_list.append(arg_list)
 			arg_list = []
